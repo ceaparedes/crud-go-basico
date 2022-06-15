@@ -1,10 +1,13 @@
 package main
 
 import (
-	"fmt"
+	// "fmt"
+	"html/template"
 	"log"
 	"net/http"
 )
+
+var templates = template.Must(template.ParseGlob("templates/*"))
 
 func main() {
 	http.HandleFunc("/", Index)
@@ -13,5 +16,6 @@ func main() {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Prueba Base de Go HTTP")
+	// fmt.Fprint(w, "Prueba Base de Go HTTP")
+	templates.ExecuteTemplate(w, "app", nil)
 }
